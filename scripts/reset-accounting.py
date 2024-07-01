@@ -1,8 +1,9 @@
 def reset_acct(env):
     """
-    Reset ALL account moves (journal entries).
+    Reset ALL account moves (journal entries). Also deletes all attachments (e.g. files) on account moves.
 
     Must un-reconcile all account moves first.
+
 
     Args:
         env (_type_): _description_
@@ -11,6 +12,11 @@ def reset_acct(env):
 
     for move in moves:
         move["state"] = "draft"
+
+        atts = move.attachment_ids
+
+        for att in atts:
+            att.unlink()
 
         move.unlink()
 
