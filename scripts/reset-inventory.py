@@ -22,10 +22,15 @@ def reset_inv(env):
         # Deleting the picking will delete associated moves
         picking.unlink()
 
-    # Not all move lines come from pickings
+    # Clean up remaining move lines
     for ml in env["stock.move.line"].search([]):
         ml["state"] = "draft"
         ml.unlink()
+
+    # clean up remaining stock moves
+    for mv in env["stock.move"].search([]):
+        mv["state"] = "draft"
+        mv.unlink()
 
     # clear reserved quantities from past orders
     for quant in env["stock.quant"].search([]):
