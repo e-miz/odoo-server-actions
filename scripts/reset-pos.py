@@ -23,5 +23,12 @@ def reset_pos(env):
             order.unlink()
         session.unlink()
 
+    # Uncomment to delete combo line items
+    # These don't seem to unlink properly when combos are deleted
+    # combo_lines = env["pos.combo.line"].search([])
+    #
+    # for combo_line in combo_lines:
+    #    combo_line.unlink()
+
 
 reset_pos(env)
