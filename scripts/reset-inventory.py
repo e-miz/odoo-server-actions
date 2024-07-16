@@ -2,6 +2,8 @@ def reset_inv(env):
     """
     Delete ALL Inventory movement history.
 
+    Need to manually allow delete access on valuation records and stock quantities.
+
     Args:
         env (_type_): _description_
     """
@@ -34,7 +36,11 @@ def reset_inv(env):
 
     # clear reserved quantities from past orders
     for quant in env["stock.quant"].search([]):
-        quant["reserved_quantity"] = 0
+        quant.unlink()
+
+    # clear stock valuations
+    for valuation_layer in env["stock.valuation.layer"].search([]):
+        valuation_layer.unlink()
 
 
 reset_inv(env)
