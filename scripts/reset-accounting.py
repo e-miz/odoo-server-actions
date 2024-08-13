@@ -7,6 +7,12 @@ def reset_acct(env):
     """
     moves = env["account.move"].search([])
 
+    # Delete ALL XML attachments across the database
+    # This bypasses the EDI check which is hardcoded in Python
+    #sql = "DELETE FROM ir_attachment WHERE name ILIKE '%.xml%'"
+    
+    #env.cr.execute(sql)
+
     for move in moves:
         move["state"] = "draft"
 
