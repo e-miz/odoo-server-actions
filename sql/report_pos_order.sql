@@ -1,4 +1,7 @@
 -- public.report_pos_order source
+-- drop before creating if you remove columns
+DROP VIEW public.report_pos_order;
+
 CREATE OR REPLACE VIEW public.report_pos_order
 AS WITH payment_method_by_order_line AS (
          SELECT pol.id AS pos_order_line_id,
@@ -38,10 +41,13 @@ AS WITH payment_method_by_order_line AS (
     s.pricelist_id,
     s.session_id,
     s.account_move IS NOT NULL AS invoiced,
-    pc.id AS pos_categ_id,
+    -- set this to null for now; this should be many2many instead of many2one
+    NULL::int4 AS pos_categ_id,
     l.price_subtotal - COALESCE(l.total_cost, 0::numeric) / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) AS margin,
     pm.payment_method_id,
-    s.employee_id
+    s.employee_id,
+    -- need UNSPSC codes for reporting to SAT
+    pt.unspsc_code_id as x_unspsc_code_id
    FROM pos_order_line l
      JOIN pos_order s ON s.id = l.order_id
      LEFT JOIN product_product p ON l.product_id = p.id
@@ -51,6 +57,5 @@ AS WITH payment_method_by_order_line AS (
      LEFT JOIN res_company co ON s.company_id = co.id
      LEFT JOIN res_currency cu ON co.currency_id = cu.id
      LEFT JOIN payment_method_by_order_line pm ON pm.pos_order_line_id = l.id
-     LEFT JOIN pos_payment_method ppm ON pm.payment_method_id = ppm.id
-     LEFT JOIN pos_category_product_template_rel pcpt ON pt.id = pcpt.product_template_id
-     LEFT JOIN pos_category pc ON pcpt.pos_category_id = pc.id;
+     LEFT JOIN pos_payment_method ppm ON pm.payment_method_id = ppm.id;
+     -- removed join on pos categories because it added a bunch of extra records that make it impossible to aggregate from Odoo
