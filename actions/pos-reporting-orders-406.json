@@ -1,0 +1,54 @@
+{
+    "binding_model_id": false,
+    "binding_type": "action",
+    "binding_view_types": "list,form",
+    "context": "{'group_by':[], 'search_default_not_cancelled': 1}",
+    "create_date": "2024-05-22 21:16:33",
+    "create_uid": [
+        1,
+        "OdooBot"
+    ],
+    "display_name": "Orders Analysis",
+    "domain": false,
+    "embedded_action_ids": [],
+    "filter": false,
+    "groups_id": [],
+    "help": "<p class=\"o_view_nocontent_smiling_face\">\n                    No data yet!\n                </p><p>\n                    Create a new POS order\n                </p>\n            ",
+    "id": 406,
+    "limit": 80,
+    "mobile_view_mode": "kanban",
+    "name": "Orders Analysis",
+    "path": false,
+    "res_id": 0,
+    "res_model": "report.pos.order",
+    "search_view_id": [
+        1109,
+        "report.pos.order.search"
+    ],
+    "target": "current",
+    "type": "ir.actions.act_window",
+    "usage": false,
+    "view_id": false,
+    "view_ids": [],
+    "view_mode": "list,graph,pivot",
+    "views": [
+        [
+            false,
+            "list"
+        ],
+        [
+            false,
+            "graph"
+        ],
+        [
+            false,
+            "pivot"
+        ]
+    ],
+    "write_date": "2025-02-10 06:06:10",
+    "write_uid": [
+        6,
+        "Eli Mizrachi"
+    ],
+    "xml_id": "point_of_sale.action_report_pos_order_all"
+}

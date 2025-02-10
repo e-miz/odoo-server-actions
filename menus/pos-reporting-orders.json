@@ -1,0 +1,28 @@
+{
+    "action": "ir.actions.act_window,406",
+    "active": true,
+    "child_id": [],
+    "complete_name": "Point of Sale/Reporting/Orders",
+    "create_date": "2024-05-22 21:16:33",
+    "create_uid": [
+        1,
+        "OdooBot"
+    ],
+    "display_name": "Point of Sale/Reporting/Orders",
+    "groups_id": [],
+    "id": 253,
+    "name": "Orders",
+    "parent_id": [
+        232,
+        "Point of Sale/Reporting"
+    ],
+    "parent_path": "229/232/253/",
+    "sequence": 3,
+    "web_icon": false,
+    "web_icon_data": false,
+    "write_date": "2025-02-07 00:58:49",
+    "write_uid": [
+        1,
+        "OdooBot"
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "action": "ir.actions.server,236",
+    "active": true,
+    "child_id": [],
+    "complete_name": "Inventory/Reporting/Locations",
+    "create_date": "2024-05-22 21:16:33",
+    "create_uid": [
+        1,
+        "OdooBot"
+    ],
+    "display_name": "Inventory/Reporting/Locations",
+    "groups_id": [
+        30,
+        21,
+        7
+    ],
+    "id": 143,
+    "name": "Locations",
+    "parent_id": [
+        136,
+        "Inventory/Reporting"
+    ],
+    "parent_path": "120/136/143/",
+    "sequence": 150,
+    "web_icon": false,
+    "web_icon_data": false,
+    "write_date": "2025-02-07 00:57:30",
+    "write_uid": [
+        1,
+        "OdooBot"
+    ]
+}

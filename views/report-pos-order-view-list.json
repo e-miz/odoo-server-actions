@@ -1,0 +1,58 @@
+{
+    "active": true,
+    "arch": "<list string=\"Point of Sale Analysis\">\n                    <field name=\"date\"/>\n                    <field name=\"order_id\" optional=\"hide\"/>\n                    <field name=\"partner_id\" optional=\"hide\"/>\n                    <field name=\"product_id\" optional=\"show\"/>\n                    <field name=\"product_categ_id\" optional=\"show\"/>\n                    <field name=\"config_id\" optional=\"hide\"/>\n                    <field name=\"company_id\" optional=\"show\" groups=\"base.group_multi_company\"/>\n                    <field name=\"price_total\" optional=\"show\"/>\n                    <field name=\"state\" optional=\"show\"/>\n                </list>",
+    "arch_base": "<list string=\"Point of Sale Analysis\">\n                    <field name=\"date\"/>\n                    <field name=\"order_id\" optional=\"hide\"/>\n                    <field name=\"partner_id\" optional=\"hide\"/>\n                    <field name=\"product_id\" optional=\"show\"/>\n                    <field name=\"product_categ_id\" optional=\"show\"/>\n                    <field name=\"config_id\" optional=\"hide\"/>\n                    <field name=\"company_id\" optional=\"show\" groups=\"base.group_multi_company\"/>\n                    <field name=\"price_total\" optional=\"show\"/>\n                    <field name=\"state\" optional=\"show\"/>\n                </list>",
+    "arch_db": "<list string=\"Point of Sale Analysis\">\n                    <field name=\"date\"/>\n                    <field name=\"order_id\" optional=\"hide\"/>\n                    <field name=\"partner_id\" optional=\"hide\"/>\n                    <field name=\"product_id\" optional=\"show\"/>\n                    <field name=\"product_categ_id\" optional=\"show\"/>\n                    <field name=\"config_id\" optional=\"hide\"/>\n                    <field name=\"company_id\" optional=\"show\" groups=\"base.group_multi_company\"/>\n                    <field name=\"price_total\" optional=\"show\"/>\n                    <field name=\"state\" optional=\"show\"/>\n                </list>",
+    "arch_fs": "point_of_sale/views/pos_order_report_view.xml",
+    "arch_prev": "<list string=\"Point of Sale Analysis\">\n                    <field name=\"date\"/>\n                    <field name=\"order_id\" optional=\"show\" widget=\"many2one\"/>\n                    <field name=\"x_unspsc_code_id\" widget=\"many2one\" optional=\"hide\"/>\n                    <field name=\"partner_id\" optional=\"hide\"/>\n                    <field name=\"product_id\" optional=\"show\" widget=\"many2one\"/>\n                    <field name=\"product_qty\" optional=\"show\"/>\n                    <field name=\"price_total\" optional=\"show\"/>\n                    <field name=\"price_subtotal_excl\" optional=\"show\"/>\n                    <field name=\"total_discount\" optional=\"show\"/>\n                    <field name=\"product_categ_id\" optional=\"hide\"/>\n                    <field name=\"config_id\" optional=\"show\"/>\n                    <field name=\"company_id\" optional=\"show\" groups=\"base.group_multi_company\"/>\n                    <field name=\"state\" widget=\"badge\" decoration-info=\"state == 'draft'\" decoration-success=\"state not in ('draft','cancel')\" optional=\"show\"/>\n                </list>",
+    "arch_updated": false,
+    "controller_page_ids": [],
+    "create_date": "2024-05-22 21:16:33",
+    "create_uid": [
+        1,
+        "OdooBot"
+    ],
+    "customize_show": false,
+    "display_name": "report.pos.order.view.list",
+    "first_page_id": false,
+    "groups_id": [],
+    "id": 1108,
+    "inherit_children_ids": [
+        1406
+    ],
+    "inherit_id": false,
+    "is_seo_optimized": false,
+    "key": false,
+    "mode": "primary",
+    "model": "report.pos.order",
+    "model_data_id": [
+        22875,
+        "report.pos.order.view.list"
+    ],
+    "model_id": [
+        561,
+        "Point of Sale Orders Report"
+    ],
+    "name": "report.pos.order.view.list",
+    "page_ids": [],
+    "priority": 16,
+    "seo_name": false,
+    "theme_template_id": false,
+    "track": false,
+    "type": "list",
+    "visibility": false,
+    "visibility_password": false,
+    "visibility_password_display": "",
+    "warning_info": "",
+    "website_id": false,
+    "website_meta_description": false,
+    "website_meta_keywords": false,
+    "website_meta_og_img": false,
+    "website_meta_title": false,
+    "write_date": "2025-02-07 00:58:49",
+    "write_uid": [
+        1,
+        "OdooBot"
+    ],
+    "xml_id": "point_of_sale.report_pos_order_view_tree"
+}
