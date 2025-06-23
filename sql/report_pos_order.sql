@@ -53,7 +53,8 @@ AS WITH payment_method_by_order_line AS (
     pm.payment_method_id,
     fpc.id AS pos_categ_id,
     s.employee_id,
-    pt.unspsc_code_id as x_unspsc_code_id
+    pt.unspsc_code_id as x_unspsc_code_id,
+    COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) as x_currency_rate
    FROM pos_order_line l
      JOIN pos_order s ON s.id = l.order_id
      LEFT JOIN product_product p ON l.product_id = p.id
