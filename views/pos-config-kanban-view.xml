@@ -86,13 +86,13 @@
                             <span name="opening_cash" t-esc="statistics.cash.opening_cash"
                                 class="col-7" />
                         </div>
-                        <!-- <div t-if="statistics.orders.paid.display" class="row">
+                        <div t-if="statistics.orders.paid.display" class="row">
                             <div class="col-5">
                                 <span>Sold</span>
                             </div>
                             <span name="paid_orders" t-esc="statistics.orders.paid.display"
                                 class="col-7" />
-                        </div> -->
+                        </div>
                         <div t-if="statistics.orders.draft.display" class="row">
                             <div class="col-5">
                                 <span>Ongoing</span>
