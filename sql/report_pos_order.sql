@@ -6,7 +6,7 @@ CREATE OR REPLACE VIEW public.report_pos_order
 AS WITH payment_method_by_order_line AS (
          SELECT pol.id AS pos_order_line_id,
             pm_1.pos_order_id,
-            (array_agg(pm_1.payment_method_id))[1] AS payment_method_id
+            (array_agg(pm_1.payment_method_id ORDER BY pm_1.id))[1] AS payment_method_id
            FROM pos_order_line pol
              LEFT JOIN pos_order po ON po.id = pol.order_id
              LEFT JOIN pos_payment pm_1 ON pm_1.pos_order_id = po.id
@@ -22,14 +22,23 @@ AS WITH payment_method_by_order_line AS (
  SELECT l.id,
     1 AS nbr_lines,
     s.date_order AS date,
-    round(l.price_subtotal /
+    -- Bug in Odoo 19 means some refunds have positive subtotals so we need to flip the sign on only those
+    round((l.price_subtotal * 
+        CASE
+            WHEN s.is_refund AND l.price_subtotal > 0 THEN -1
+            ELSE 1
+        END) /
         CASE COALESCE(s.currency_rate, 0::numeric)
             WHEN 0 THEN 1.0
             ELSE s.currency_rate
         END, cu.decimal_places) AS price_subtotal_excl,
     l.qty AS product_qty,
     l.qty * l.price_unit / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) AS price_sub_total,
-    round(l.price_subtotal_incl / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0), cu.decimal_places) AS price_total,
+    round((l.price_subtotal_incl * 
+    CASE
+        WHEN s.is_refund AND l.price_subtotal_incl > 0 THEN -1
+        ELSE 1
+    END) / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0), cu.decimal_places) AS price_total,
     l.qty * l.price_unit * (l.discount / 100::numeric) / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) AS total_discount,
         CASE
             WHEN (l.qty * u.factor) = 0::numeric THEN NULL::numeric
@@ -49,12 +58,14 @@ AS WITH payment_method_by_order_line AS (
     s.pricelist_id,
     s.session_id,
     s.account_move IS NOT NULL AS invoiced,
-    l.price_subtotal - COALESCE(l.total_cost, 0::numeric) / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) AS margin,
+    l.price_subtotal *
+        CASE
+            WHEN s.is_refund THEN '-1'::integer
+            ELSE 1
+        END::numeric - COALESCE(l.total_cost, 0::numeric) / COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) AS margin,
     pm.payment_method_id,
     fpc.id AS pos_categ_id,
-    s.employee_id,
-    pt.unspsc_code_id as x_unspsc_code_id,
-    COALESCE(NULLIF(s.currency_rate, 0::numeric), 1.0) as x_currency_rate
+    s.employee_id
    FROM pos_order_line l
      JOIN pos_order s ON s.id = l.order_id
      LEFT JOIN product_product p ON l.product_id = p.id
